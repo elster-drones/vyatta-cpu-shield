@@ -1,3 +1,17 @@
+vyatta-cpu-shield (0.2.14) unstable; urgency=medium
+
+  * Stop shipping vyatta-cpu-shield.service under /lib: it duplicated the
+    debian/ unit dh_installsystemd already installs under /usr/lib on
+    merged-/usr systems, with stale content (no --startup, no
+    system-configure ordering), and dpkg refuses to install a package that
+    ships the same aliased path twice with different content.
+  * Install vyatta-cpu-shield-early.service via dh_installsystemd
+    (debian/vyatta-cpu-shield.vyatta-cpu-shield-early.service) instead of
+    debian/install, so it lands under /usr/lib/systemd/system alongside the
+    main unit instead of the aliased /lib path.
+
+ -- Erik Ziegenbalg <erikziege@gmail.com>  Mon, 28 Sep 2026 13:41:49 +0000
+
 vyatta-cpu-shield (0.2.13) unstable; urgency=medium
 
   [ Nicholas Brown ]
