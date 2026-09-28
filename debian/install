@@ -1,2 +1,3 @@
 usr
 etc
+lib/systemd/system/vyatta-cpu-shield-early.service usr/lib/systemd/system

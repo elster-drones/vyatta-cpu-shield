@@ -1,3 +1,19 @@
+vyatta-cpu-shield (0.2.15) unstable; urgency=medium
+
+  * 0.2.14 dropped vyatta-cpu-shield-early.service from the package
+    entirely: this package's debhelper compat level (9) runs
+    dh_systemd_enable/dh_systemd_start, which only auto-installs
+    debian/vyatta-cpu-shield.service (or @.service) by that exact name;
+    it does not support the debian/package.name.service convention used
+    to rename debian/vyatta-cpu-shield.vyatta-cpu-shield-early.service
+    (that convention belongs to dh_installsystemd, which this package
+    does not use), so the renamed file was silently never installed.
+    Ship it via debian/install with an explicit usr/lib/systemd/system
+    destination instead, so both units land there and dh_systemd_enable
+    still finds and enables it.
+
+ -- Erik Ziegenbalg <erikziege@gmail.com>  Mon, 28 Sep 2026 13:46:34 +0000
+
 vyatta-cpu-shield (0.2.14) unstable; urgency=medium
 
   * Stop shipping vyatta-cpu-shield.service under /lib: it duplicated the
